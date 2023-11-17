@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/17 17:02:35 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/17 17:56:44 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	*create_fork(t_settings settings)
 	fork = malloc(sizeof(int) * settings.nb_philo);
 	if (!fork)
 		return (NULL);
-	idiot = 0;
-	while (idiot < (int) settings.nb_philo)
+	idiot = 1;
+	while (idiot <= (int) settings.nb_philo)
 	{
 		*(fork + idiot) = idiot;
 		idiot++;
@@ -33,17 +33,17 @@ void	set_data(t_settings settings, t_data *data, int *fork)
 {
 	int	idiot;
 
-	idiot = 0;
-	while (idiot < (int) settings.nb_philo)
+	idiot = 1;
+	while (idiot <= (int) settings.nb_philo)
 	{
 		(data + idiot)->settings = settings;
 		(data + idiot)->idiot.idiot_number = idiot;
 		(data + idiot)->idiot.alive = 1;
-		if (idiot == 0)
+		if (idiot == 1)
 			(data + idiot)->idiot.left_fork = (fork + settings.nb_philo - 1);
 		else
 			(data + idiot)->idiot.left_fork = (fork + idiot - 1);
-		if (idiot == (int) settings.nb_philo - 1)
+		if (idiot == (int) settings.nb_philo)
 			(data + idiot)->idiot.right_fork = (fork);
 		else
 			(data + idiot)->idiot.right_fork = (fork + idiot + 1);
@@ -66,17 +66,36 @@ t_data	*create_data(t_settings settings)
 	return (data);
 }
 
+void	start_thread(t_settings settings, t_data *data)
+{
+	int	idiot;
+
+	idiot = 1;
+	while (idiot <= (int) settings.nb_philo)
+	{
+		if (idiot % 2 == 1)
+			pthread_create(thread + idiot, 0, life, data + idiot);
+		idiot++;
+	}
+	idiot = 1;
+	while (idiot <= (int) settings.nb_philo)
+	{
+		if (idiot % 2)
+			pthread_create(thread + idiot, 0, life, data + idiot);
+		idiot++;
+	}
+}
+
 void	start_simulation(t_settings settings)
 {
-	t_data	*data;
-	int		idiot;
+	t_data		*data;
 
+	thread = malloc(sizeof(pthread) * settings.nb_philo);
+	if (!thread)
+		return ;
 	data = create_data(settings);
-	idiot = 0;
-	while (idiot < (int) settings.nb_philo)
-	{
-		printf("idiot number : %i created ", (data + idiot)->idiot.idiot_number);
-		printf("left fork : %i assigned ", *(data + idiot)->idiot.left_fork);
-		printf("right fork : %i assigned\n", *(data + idiot++)->idiot.right_fork);
-	}
+	if (!data)
+		return ;
+	start_thread(settings, data);
+	check_alive(data);
 }
