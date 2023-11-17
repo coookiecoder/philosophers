@@ -1,4 +1,4 @@
-files = main ft_ullatoi
+files = main ft_ullatoi simulation
 
 sources = $(foreach buffer, $(files), $(buffer).c)
 

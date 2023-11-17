@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/17 15:21:27 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/17 17:01:17 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PHILO_H
 
 # include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
 
 // if you sature this type you are a mad man (THAT'S A WARNING)
 
@@ -24,6 +26,23 @@ typedef struct s_settings {
 	unsigned long long int	time_to_sleep;
 	unsigned long long int	required_eating;
 }	t_settings;
+
+// structure of the idiot (i mean it, this asshole can die while sleeping 
+// and while eating... yes while EATING)
+
+typedef struct s_idiot {
+	int		idiot_number;
+	int		*left_fork;
+	int		*right_fork;
+	_Bool	alive;
+}	t_idiot;
+
+// main struct for data mangement
+
+typedef struct s_data {
+	t_settings	settings;
+	t_idiot		idiot;
+}	t_data;
 
 // ft_ullatoi.c
 
