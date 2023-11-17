@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/17 17:56:44 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/17 18:34:49 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	*create_fork(t_settings settings)
 	fork = malloc(sizeof(int) * settings.nb_philo);
 	if (!fork)
 		return (NULL);
-	idiot = 1;
-	while (idiot <= (int) settings.nb_philo)
+	idiot = 0;
+	while (idiot < (int) settings.nb_philo)
 	{
-		*(fork + idiot) = idiot;
+		*(fork + idiot) = idiot + 1;
 		idiot++;
 	}
 	return (fork);
@@ -33,11 +33,11 @@ void	set_data(t_settings settings, t_data *data, int *fork)
 {
 	int	idiot;
 
-	idiot = 1;
-	while (idiot <= (int) settings.nb_philo)
+	idiot = 0;
+	while (idiot < (int) settings.nb_philo)
 	{
 		(data + idiot)->settings = settings;
-		(data + idiot)->idiot.idiot_number = idiot;
+		(data + idiot)->idiot.idiot_number = idiot + 1;
 		(data + idiot)->idiot.alive = 1;
 		if (idiot == 1)
 			(data + idiot)->idiot.left_fork = (fork + settings.nb_philo - 1);
@@ -66,10 +66,9 @@ t_data	*create_data(t_settings settings)
 	return (data);
 }
 
-void	start_thread(t_settings settings, t_data *data)
+void	start_thread(t_settings settings, t_data *data, pthread_t *thread)
 {
 	int	idiot;
-
 	idiot = 1;
 	while (idiot <= (int) settings.nb_philo)
 	{
@@ -89,13 +88,15 @@ void	start_thread(t_settings settings, t_data *data)
 void	start_simulation(t_settings settings)
 {
 	t_data		*data;
+	pthread_t	*thread;
 
-	thread = malloc(sizeof(pthread) * settings.nb_philo);
+	thread = malloc(sizeof(pthread_t) * settings.nb_philo);
 	if (!thread)
 		return ;
 	data = create_data(settings);
 	if (!data)
 		return ;
-	start_thread(settings, data);
+	start_thread(settings, data, thread);
+	//start_thread(settings, data);
 	check_alive(data);
 }
