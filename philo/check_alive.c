@@ -60,6 +60,20 @@ void	update_state(t_data *data)
 	}
 }
 
+static
+void	genocide_idiot(t_data *data)
+{
+	int idiot;
+
+	idiot = 0;
+	while (idiot < (int) data->settings.nb_philo)
+	{
+		data->idiot.alive = -1;
+		data++;
+		idiot++;
+	}
+}
+
 void	check_alive(t_data *data)
 {
 	int idiot;
@@ -80,6 +94,8 @@ void	check_alive(t_data *data)
 				end = end + 2;
 			idiot++;
 		}
+		if (dead)
+			genocide_idiot(data);
 		if (dead || end == (int) data->settings.nb_philo * 2)
 			break;
 		usleep(1000);

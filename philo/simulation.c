@@ -45,7 +45,7 @@ void	set_data(t_settings settings, t_data *data, pthread_mutex_t *fork)
 			(data + idiot)->idiot.left_fork = (fork + settings.nb_philo - 1);
 		else
 			(data + idiot)->idiot.left_fork = (fork + idiot - 1);
-		if (idiot == (int) settings.nb_philo)
+		if (idiot == (int) settings.nb_philo - 1)
 			(data + idiot)->idiot.right_fork = (fork);
 		else
 			(data + idiot)->idiot.right_fork = (fork + idiot);
@@ -73,6 +73,7 @@ static
 void	start_thread(t_settings settings, t_data *data, pthread_t *thread)
 {
 	int	idiot;
+
 	idiot = 1;
 	while (idiot < (int) settings.nb_philo)
 	{
@@ -89,6 +90,7 @@ void	start_thread(t_settings settings, t_data *data, pthread_t *thread)
 
 void	start_simulation(t_settings settings)
 {
+	int			idiot;
 	t_data		*data;
 	pthread_t	*thread;
 
@@ -99,5 +101,14 @@ void	start_simulation(t_settings settings)
 	if (!data)
 		return ;
 	start_thread(settings, data, thread);
-	check_alive(data);
+	check_alive(data);	
+	idiot = 0;
+	while (idiot < (int) settings.nb_philo)
+	{
+		pthread_join(*(thread + idiot), NULL);
+		idiot++;
+	}
+	free((data + settings.nb_philo - 1)->idiot.right_fork);
+	free(data);
+	free(thread);
 }
