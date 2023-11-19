@@ -38,13 +38,13 @@ t_settings	init_arg_with_end(char **argv)
 
 _Bool	check_settings(t_settings settings)
 {
-	if (settings.nb_philo == 0 || settings.nb_philo > 200)
+	if (settings.nb_philo == 0)
 		return (0);
-	if (settings.time_to_die < 60)
+	if (settings.time_to_die == 0)
 		return (0);
-	if (settings.time_to_eat < 60)
+	if (settings.time_to_eat == 0)
 		return (0);
-	if (settings.time_to_sleep < 60)
+	if (settings.time_to_sleep == 0)
 		return (0);
 	return (1);
 }

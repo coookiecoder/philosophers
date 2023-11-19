@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <pthread.h>
-# include <time.h>
+# include <sys/time.h>
 
 // if you sature this type you are a mad man (THAT'S A WARNING)
 
@@ -33,10 +33,12 @@ typedef struct s_settings {
 // and while eating... yes while EATING)
 
 typedef struct s_idiot {
-	int		idiot_number;
-	int		*left_fork;
-	int		*right_fork;
-	int		alive;
+	int						idiot_number;
+	pthread_mutex_t			*left_fork;
+	pthread_mutex_t			*right_fork;
+	int						alive;
+	unsigned long long int	eaten;
+	unsigned long long int	time_left;
 }	t_idiot;
 
 // main struct for data mangement
@@ -56,6 +58,10 @@ void					start_simulation(t_settings settings);
 
 // life.c
 
-void					life(void *data);
+void					*life(void *data);
+
+// check_alive.c
+
+void					check_alive(t_data *data);
 
 #endif
