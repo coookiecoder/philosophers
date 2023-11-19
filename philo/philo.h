@@ -64,4 +64,19 @@ void					*life(void *data);
 
 void					check_alive(t_data *data);
 
+// itoa.c
+
+char					*itoa(unsigned long long int n);
+
+// strlen.c
+
+int						ft_strlen(char *str);
+
+// log.c
+
+void					log_fork(unsigned long long int time, int ID);
+void					log_eating(unsigned long long int time, int ID);
+void					log_sleeping(unsigned long long int time, int ID);
+void					log_thinking(unsigned long long int time, int ID);
+
 #endif

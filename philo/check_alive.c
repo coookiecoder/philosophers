@@ -22,9 +22,19 @@ unsigned long long int gettime(void)
 }
 
 static
-void	log_death(t_data *data)
+void	log_death(unsigned long long int time, int ID)
 {
-	printf("%llu %i died\n", gettime(), (data)->idiot.idiot_number);
+	char	*time_str;
+	char	*ID_str;
+
+	time_str = itoa(time);
+	ID_str = itoa(ID);
+	write(1, time_str, ft_strlen(time_str));
+	write(1, " ", 1);
+	write(1, ID_str, ft_strlen(ID_str));
+	write(1, " died\n", 6);
+	free(time_str);
+	free(ID_str);
 }
 
 static
@@ -39,7 +49,7 @@ void	update_state(t_data *data)
 		if (data->idiot.time_left == 0)
 		{
 			data->idiot.alive = -1;
-			log_death(data + idiot);
+			log_death(gettime(), data->idiot.idiot_number);
 			return ;
 		}
 		if (data->settings.required_eating)

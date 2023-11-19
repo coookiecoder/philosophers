@@ -27,12 +27,12 @@ void	eat_baka(t_data data)
 	unsigned long long int	eating;
 
 	pthread_mutex_lock(data.idiot.left_fork);
-	//printf("%llu %i has taken a fork\n", gettime(), data.idiot.idiot_number);
+	log_fork(gettime(), data.idiot.idiot_number);
 	pthread_mutex_lock(data.idiot.right_fork);
-	//printf("%llu %i has taken a fork\n", gettime(), data.idiot.idiot_number);
+	log_fork(gettime(), data.idiot.idiot_number);
 	eating = 0;
 	if (data.idiot.alive == 1)
-		printf("%llu %i is eating\n", gettime(), data.idiot.idiot_number);
+		log_eating(gettime(), data.idiot.idiot_number);
 	while (data.idiot.alive == 1 && eating < data.settings.time_to_eat * 1000)
 	{
 		eating = eating + 1000;
@@ -49,7 +49,7 @@ void	sleep_baka(t_data data)
 
 	sleeping = 0;
 	if (data.idiot.alive == 1)
-		printf("%llu %i is sleeping\n", gettime(), data.idiot.idiot_number);
+		log_sleeping(gettime(), data.idiot.idiot_number);
 	while (data.idiot.alive == 1 && sleeping < data.settings.time_to_sleep * 1000)
 	{
 		sleeping = sleeping + 1000;
@@ -61,7 +61,7 @@ static
 void	think_baka(t_data data)
 {
 	if (data.idiot.alive)
-		printf("%llu %i is thinking\n", gettime(), data.idiot.idiot_number);
+		log_thinking(gettime(), data.idiot.idiot_number);
 }
 
 void	*life(void	*data)
