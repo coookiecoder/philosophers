@@ -1,4 +1,4 @@
-files = main ullatoi simulation life check_alive strlen itoa log
+files = main ullatoi simulation life check_alive strlen itoa log log_death
 
 sources = $(foreach buffer, $(files), $(buffer).c)
 

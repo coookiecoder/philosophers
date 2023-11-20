@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/17 18:45:06 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/20 11:08:53 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,9 @@ void					log_fork(unsigned long long int time, int ID);
 void					log_eating(unsigned long long int time, int ID);
 void					log_sleeping(unsigned long long int time, int ID);
 void					log_thinking(unsigned long long int time, int ID);
+
+// log_death.c
+
+void					log_death(unsigned long long int time, int ID);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/17 18:34:49 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/20 10:51:52 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	start_simulation(t_settings settings)
 	if (!data)
 		return ;
 	start_thread(settings, data, thread);
-	check_alive(data);	
+	check_alive(data);
 	idiot = 0;
 	while (idiot < (int) settings.nb_philo)
 	{

@@ -6,14 +6,14 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/17 18:29:23 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/20 11:21:16 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static
-unsigned long long int gettime(void)
+unsigned long long int	gettime(void)
 {
 	struct timeval	tv;
 
@@ -22,33 +22,33 @@ unsigned long long int gettime(void)
 }
 
 static
-void	log_death(unsigned long long int time, int ID)
+void	genocide_idiot(t_data *data)
 {
-	char	*time_str;
-	char	*ID_str;
+	int	idiot;
 
-	time_str = itoa(time);
-	ID_str = itoa(ID);
-	write(1, time_str, ft_strlen(time_str));
-	write(1, " ", 1);
-	write(1, ID_str, ft_strlen(ID_str));
-	write(1, " died\n", 6);
-	free(time_str);
-	free(ID_str);
+	idiot = 0;
+	while (idiot < (int) data->settings.nb_philo)
+	{
+		data->idiot.alive = -1;
+		data++;
+		idiot++;
+	}
 }
 
 static
 void	update_state(t_data *data)
 {
-	int idiot;
+	t_data	*buffer;
+	int		idiot;
 
+	buffer = data;
 	idiot = 0;
 	while (idiot < (int) data->settings.nb_philo)
 	{
 		data->idiot.time_left -= 1;
 		if (data->idiot.time_left == 0)
 		{
-			data->idiot.alive = -1;
+			genocide_idiot(buffer);
 			log_death(gettime(), data->idiot.idiot_number);
 			return ;
 		}
@@ -60,27 +60,13 @@ void	update_state(t_data *data)
 	}
 }
 
-static
-void	genocide_idiot(t_data *data)
-{
-	int idiot;
-
-	idiot = 0;
-	while (idiot < (int) data->settings.nb_philo)
-	{
-		data->idiot.alive = -1;
-		data++;
-		idiot++;
-	}
-}
-
 void	check_alive(t_data *data)
 {
-	int idiot;
-	int dead;
-	int end;
+	int	idiot;
+	int	dead;
+	int	end;
 
-	while(1)
+	while (1)
 	{
 		idiot = 0;
 		dead = 0;
@@ -94,11 +80,9 @@ void	check_alive(t_data *data)
 				end = end + 2;
 			idiot++;
 		}
-		if (dead)
-			genocide_idiot(data);
 		if (dead || end == (int) data->settings.nb_philo * 2)
-			break;
-		usleep(1000);
+			break ;
+		usleep(100);
 	}
-	usleep(10000);
+	usleep(1000);
 }
