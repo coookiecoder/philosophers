@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/20 16:10:09 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/20 16:45:48 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,39 +27,40 @@ void	genocide_idiot(t_data *data)
 	int	idiot;
 
 	idiot = 0;
-	while (idiot < (int) data->settings.nb_philo)
+	while (idiot < (int) data->settings.nb_philo - 1)
 	{
 		data->idiot.alive = -1;
 		data->idiot.time_left = 1;
 		data++;
 		idiot++;
 	}
+	data->idiot.alive = -1;
+	data->idiot.time_left = 1;
 }
 
 static
-int	update_state(t_data *data)
+void	update_state(t_data *data)
 {
-	t_data	*buffer;
 	int		idiot;
 
-	buffer = data;
 	idiot = 0;
 	while (idiot < (int) data->settings.nb_philo)
 	{
 		data->idiot.time_left -= 1;
 		if (data->idiot.time_left == 0)
 		{
-			genocide_idiot(buffer);
+			data->idiot.alive = -1;
 			log_death(gettime(), data->idiot.idiot_number_str);
-			return (1);
+			return ;
 		}
 		if (data->settings.required_eating)
 			if (data->idiot.eaten == data->settings.required_eating)
 				data->idiot.alive = 2;
-		data++;
 		idiot++;
+		if (idiot < (int) data->settings.nb_philo)
+			data++;
 	}
-	return (0);
+	return ;
 }
 
 void	check_alive(t_data *data)
@@ -73,8 +74,7 @@ void	check_alive(t_data *data)
 		idiot = 0;
 		dead = 0;
 		end = 0;
-		if (update_state(data))
-			break ;
+		update_state(data);
 		while (idiot < (int) data->settings.nb_philo)
 		{
 			if ((idiot + data)->idiot.alive == -1)

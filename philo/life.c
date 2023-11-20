@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/20 16:15:40 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/20 16:43:44 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ unsigned long long int	gettime(void)
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	return (1000 * tv.tv_sec + tv.tv_usec / 1000);
+	return (1000 * tv.tv_sec + tv.tv_usec / 1000LL);
 }
 
 static

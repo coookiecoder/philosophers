@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/20 15:27:19 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/20 16:47:08 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	set_data(t_settings settings, t_data *data, pthread_mutex_t *fork)
 		(data + idiot)->idiot.idiot_number = idiot + 1;
 		(data + idiot)->idiot.idiot_number_str = itoa(idiot + 1);
 		(data + idiot)->idiot.alive = 1;
+		(data + idiot)->idiot.time_left = 2;
 		if (idiot == 0)
 			(data + idiot)->idiot.left_fork = (fork);
 		else
@@ -108,6 +109,7 @@ void	start_simulation(t_settings settings)
 	while (idiot < (int) settings.nb_philo)
 	{
 		pthread_join(*(thread + idiot), NULL);
+		free((data + idiot)->idiot.idiot_number_str);
 		idiot++;
 	}
 	free((data + settings.nb_philo - 1)->idiot.right_fork);
