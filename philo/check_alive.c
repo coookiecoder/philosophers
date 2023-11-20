@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/20 12:55:37 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/20 16:10:09 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	genocide_idiot(t_data *data)
 	while (idiot < (int) data->settings.nb_philo)
 	{
 		data->idiot.alive = -1;
+		data->idiot.time_left = 1;
 		data++;
 		idiot++;
 	}
@@ -48,8 +49,8 @@ int	update_state(t_data *data)
 		data->idiot.time_left -= 1;
 		if (data->idiot.time_left == 0)
 		{
-			log_death(gettime(), data->idiot.idiot_number_str);
 			genocide_idiot(buffer);
+			log_death(gettime(), data->idiot.idiot_number_str);
 			return (1);
 		}
 		if (data->settings.required_eating)
@@ -82,9 +83,10 @@ void	check_alive(t_data *data)
 				end = end + 2;
 			idiot++;
 		}
+		if (dead)
+			genocide_idiot(data);
 		if (dead || end == (int) data->settings.nb_philo * 2)
 			break ;
-		usleep(100);
+		usleep(1000);
 	}
-	usleep(1000);
 }

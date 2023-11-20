@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/20 12:28:50 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/20 15:49:00 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ int						ft_strlen(char *str);
 
 // log.c
 
-void					log_fork(unsigned long long int time, char *id_str);
-void					log_eating(unsigned long long int time, char *id_str);
-void					log_sleeping(unsigned long long int time, char *id_str);
-void					log_thinking(unsigned long long int time, char *id_str);
+void					log_fork(unsigned long long int time, t_data *data);
+void					log_eating(unsigned long long int time, t_data *data);
+void					log_sleeping(unsigned long long int time, t_data *data);
+void					log_thinking(unsigned long long int time, t_data *data);
 
 // log_death.c
 

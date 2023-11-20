@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/20 12:27:44 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/20 16:16:28 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,42 +33,54 @@ void	join(char *buffer, char *time, char *ID, char *end)
 	free(time);
 }
 
-void	log_fork(unsigned long long int time, char *id_str)
+void	log_fork(unsigned long long int time, t_data *data)
 {
 	char	*time_str;
 	char	buffer[100];
+	int		len;
 
 	time_str = itoa(time);
-	join(buffer, time_str, id_str, " has taken a fork\n");
-	write(1, buffer, ft_strlen(buffer));
+	join(buffer, time_str, data->idiot.idiot_number_str, " has taken a fork\n");
+	len = ft_strlen(buffer);
+	if (data->idiot.alive == 1)
+		write(1, buffer, len);
 }
 
-void	log_eating(unsigned long long int time, char *id_str)
+void	log_eating(unsigned long long int time, t_data *data)
 {
 	char	*time_str;
 	char	buffer[100];
+	int		len;
 
 	time_str = itoa(time);
-	join(buffer, time_str, id_str, " is eating\n");
-	write(1, buffer, ft_strlen(buffer));
+	join(buffer, time_str, data->idiot.idiot_number_str, " is eating\n");
+	len = ft_strlen(buffer);
+	if (data->idiot.alive == 1)
+		write(1, buffer, len);
 }
 
-void	log_sleeping(unsigned long long int time, char *id_str)
+void	log_sleeping(unsigned long long int time, t_data *data)
 {
 	char	*time_str;
 	char	buffer[100];
+	int		len;
 
 	time_str = itoa(time);
-	join(buffer, time_str, id_str, " is sleeping\n");
-	write(1, buffer, ft_strlen(buffer));
+	join(buffer, time_str, data->idiot.idiot_number_str, " is sleeping\n");
+	len = ft_strlen(buffer);
+	if (data->idiot.alive == 1)
+		write(1, buffer, len);
 }
 
-void	log_thinking(unsigned long long int time, char *id_str)
+void	log_thinking(unsigned long long int time, t_data *data)
 {
 	char	*time_str;
 	char	buffer[100];
+	int		len;
 
 	time_str = itoa(time);
-	join(buffer, time_str, id_str, " is thinking\n");
-	write(1, buffer, ft_strlen(buffer));
+	join(buffer, time_str, data->idiot.idiot_number_str, " is thinking\n");
+	len = ft_strlen(buffer);
+	if (data->idiot.alive == 1)
+		write(1, buffer, len);
 }

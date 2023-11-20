@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/20 13:01:53 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/20 15:27:19 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	start_thread(t_settings settings, t_data *data, pthread_t *thread)
 		pthread_create(thread + idiot, NULL, &life, data + idiot);
 		idiot += 2;
 	}
+	usleep(1000);
 	idiot = 0;
 	while (idiot < (int) settings.nb_philo)
 	{
