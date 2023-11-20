@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/20 10:51:52 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/20 13:01:53 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,16 @@ void	set_data(t_settings settings, t_data *data, pthread_mutex_t *fork)
 	{
 		(data + idiot)->settings = settings;
 		(data + idiot)->idiot.idiot_number = idiot + 1;
+		(data + idiot)->idiot.idiot_number_str = itoa(idiot + 1);
 		(data + idiot)->idiot.alive = 1;
 		if (idiot == 0)
-			(data + idiot)->idiot.left_fork = (fork + settings.nb_philo - 1);
+			(data + idiot)->idiot.left_fork = (fork);
 		else
-			(data + idiot)->idiot.left_fork = (fork + idiot - 1);
+			(data + idiot)->idiot.left_fork = (fork + idiot);
 		if (idiot == (int) settings.nb_philo - 1)
 			(data + idiot)->idiot.right_fork = (fork);
 		else
-			(data + idiot)->idiot.right_fork = (fork + idiot);
+			(data + idiot)->idiot.right_fork = (fork + idiot + 1);
 		idiot++;
 	}
 }
@@ -77,13 +78,13 @@ void	start_thread(t_settings settings, t_data *data, pthread_t *thread)
 	idiot = 1;
 	while (idiot < (int) settings.nb_philo)
 	{
-		pthread_create(thread + idiot, 0, &life, data + idiot);
+		pthread_create(thread + idiot, NULL, &life, data + idiot);
 		idiot += 2;
 	}
 	idiot = 0;
 	while (idiot < (int) settings.nb_philo)
 	{
-		pthread_create(thread + idiot, 0, &life, data + idiot);
+		pthread_create(thread + idiot, NULL, &life, data + idiot);
 		idiot += 2;
 	}
 }

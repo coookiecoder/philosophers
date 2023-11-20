@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/20 11:21:16 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/20 12:55:37 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ unsigned long long int	gettime(void)
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	return (1000000 * tv.tv_sec + tv.tv_usec);
+	return (1000 * tv.tv_sec + tv.tv_usec / 1000);
 }
 
 static
@@ -36,7 +36,7 @@ void	genocide_idiot(t_data *data)
 }
 
 static
-void	update_state(t_data *data)
+int	update_state(t_data *data)
 {
 	t_data	*buffer;
 	int		idiot;
@@ -48,9 +48,9 @@ void	update_state(t_data *data)
 		data->idiot.time_left -= 1;
 		if (data->idiot.time_left == 0)
 		{
+			log_death(gettime(), data->idiot.idiot_number_str);
 			genocide_idiot(buffer);
-			log_death(gettime(), data->idiot.idiot_number);
-			return ;
+			return (1);
 		}
 		if (data->settings.required_eating)
 			if (data->idiot.eaten == data->settings.required_eating)
@@ -58,6 +58,7 @@ void	update_state(t_data *data)
 		data++;
 		idiot++;
 	}
+	return (0);
 }
 
 void	check_alive(t_data *data)
@@ -71,7 +72,8 @@ void	check_alive(t_data *data)
 		idiot = 0;
 		dead = 0;
 		end = 0;
-		update_state(data);
+		if (update_state(data))
+			break ;
 		while (idiot < (int) data->settings.nb_philo)
 		{
 			if ((idiot + data)->idiot.alive == -1)

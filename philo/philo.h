@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/20 11:08:53 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/20 12:28:50 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_settings {
 
 typedef struct s_idiot {
 	int						idiot_number;
+	char					*idiot_number_str;
 	pthread_mutex_t			*left_fork;
 	pthread_mutex_t			*right_fork;
 	int						alive;
@@ -74,13 +75,13 @@ int						ft_strlen(char *str);
 
 // log.c
 
-void					log_fork(unsigned long long int time, int ID);
-void					log_eating(unsigned long long int time, int ID);
-void					log_sleeping(unsigned long long int time, int ID);
-void					log_thinking(unsigned long long int time, int ID);
+void					log_fork(unsigned long long int time, char *id_str);
+void					log_eating(unsigned long long int time, char *id_str);
+void					log_sleeping(unsigned long long int time, char *id_str);
+void					log_thinking(unsigned long long int time, char *id_str);
 
 // log_death.c
 
-void					log_death(unsigned long long int time, int ID);
+void					log_death(unsigned long long int time, char *id_str);
 
 #endif

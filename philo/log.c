@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/20 11:04:13 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/20 12:27:44 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,69 +31,44 @@ void	join(char *buffer, char *time, char *ID, char *end)
 		*(buffer + cursor_buffer++) = *(end + cursor++);
 	*(buffer + cursor_buffer) = 0;
 	free(time);
-	free(ID);
 }
 
-void	log_fork(unsigned long long int time, int ID)
+void	log_fork(unsigned long long int time, char *id_str)
 {
 	char	*time_str;
-	char	*id_str;
-	char	*buffer;
+	char	buffer[100];
 
 	time_str = itoa(time);
-	id_str = itoa(ID);
-	buffer = malloc(ft_strlen(time_str) + ft_strlen(id_str) + 19 + 1);
-	if (!buffer)
-		return ;
 	join(buffer, time_str, id_str, " has taken a fork\n");
 	write(1, buffer, ft_strlen(buffer));
-	free(buffer);
 }
 
-void	log_eating(unsigned long long int time, int ID)
+void	log_eating(unsigned long long int time, char *id_str)
 {
 	char	*time_str;
-	char	*id_str;
-	char	*buffer;
+	char	buffer[100];
 
 	time_str = itoa(time);
-	id_str = itoa(ID);
-	buffer = malloc(ft_strlen(time_str) + ft_strlen(id_str) + 13 + 1);
-	if (!buffer)
-		return ;
 	join(buffer, time_str, id_str, " is eating\n");
 	write(1, buffer, ft_strlen(buffer));
-	free(buffer);
 }
 
-void	log_sleeping(unsigned long long int time, int ID)
+void	log_sleeping(unsigned long long int time, char *id_str)
 {
 	char	*time_str;
-	char	*id_str;
-	char	*buffer;
+	char	buffer[100];
 
 	time_str = itoa(time);
-	id_str = itoa(ID);
-	buffer = malloc(ft_strlen(time_str) + ft_strlen(id_str) + 15 + 1);
-	if (!buffer)
-		return ;
 	join(buffer, time_str, id_str, " is sleeping\n");
 	write(1, buffer, ft_strlen(buffer));
-	free(buffer);
 }
 
-void	log_thinking(unsigned long long int time, int ID)
+void	log_thinking(unsigned long long int time, char *id_str)
 {
 	char	*time_str;
-	char	*id_str;
-	char	*buffer;
+	char	buffer[100];
 
 	time_str = itoa(time);
-	id_str = itoa(ID);
-	buffer = malloc(ft_strlen(time_str) + ft_strlen(id_str) + 15 + 1);
-	if (!buffer)
-		return ;
 	join(buffer, time_str, id_str, " is thinking\n");
 	write(1, buffer, ft_strlen(buffer));
-	free(buffer);
 }

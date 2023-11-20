@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/20 11:09:22 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/20 12:29:32 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,14 @@ void	join(char *buffer, char *time, char *ID, char *end)
 		*(buffer + cursor_buffer++) = *(end + cursor++);
 	*(buffer + cursor_buffer) = 0;
 	free(time);
-	free(ID);
 }
 
-void	log_death(unsigned long long int time, int ID)
+void	log_death(unsigned long long int time, char *id_str)
 {
 	char	*time_str;
-	char	*id_str;
-	char	*buffer;
+	char	buffer[100];
 
 	time_str = itoa(time);
-	id_str = itoa(ID);
-	buffer = malloc(ft_strlen(time_str) + ft_strlen(id_str) + 11 + 1);
-	if (!buffer)
-		return ;
 	join(buffer, time_str, id_str, " has died\n");
 	write(1, buffer, ft_strlen(buffer));
-	free(buffer);
 }
