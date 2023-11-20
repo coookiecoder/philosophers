@@ -6,7 +6,7 @@
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/20 16:16:28 by abareux          ###   ########.fr       */
+/*   Updated: 2023/11/20 16:51:01 by abareux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	log_fork(unsigned long long int time, t_data *data)
 	int		len;
 
 	time_str = itoa(time);
+	if (!time_str)
+		return ;
 	join(buffer, time_str, data->idiot.idiot_number_str, " has taken a fork\n");
 	len = ft_strlen(buffer);
 	if (data->idiot.alive == 1)
@@ -53,6 +55,8 @@ void	log_eating(unsigned long long int time, t_data *data)
 	int		len;
 
 	time_str = itoa(time);
+	if (!time_str)
+		return ;
 	join(buffer, time_str, data->idiot.idiot_number_str, " is eating\n");
 	len = ft_strlen(buffer);
 	if (data->idiot.alive == 1)
@@ -66,6 +70,8 @@ void	log_sleeping(unsigned long long int time, t_data *data)
 	int		len;
 
 	time_str = itoa(time);
+	if (!time_str)
+		return ;
 	join(buffer, time_str, data->idiot.idiot_number_str, " is sleeping\n");
 	len = ft_strlen(buffer);
 	if (data->idiot.alive == 1)
@@ -79,6 +85,8 @@ void	log_thinking(unsigned long long int time, t_data *data)
 	int		len;
 
 	time_str = itoa(time);
+	if (!time_str)
+		return ;
 	join(buffer, time_str, data->idiot.idiot_number_str, " is thinking\n");
 	len = ft_strlen(buffer);
 	if (data->idiot.alive == 1)
