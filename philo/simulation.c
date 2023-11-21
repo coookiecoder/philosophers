@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                                            */
-/*   simulation.c                                       :+:      :+:    :+:   */
+/*   NOOT NOOT MOTHER FUCKER                      :#:  :#:         :#:  :#:   */
 /*                                                :#:  :#::#     #::#:  :#:   */
 /*   By: an asshole who like to break thing       :#:  :#::#: # :#::#:  :#:   */
 /*                                                :##::##: :#:#:#: :##::##:   */
 /*   Created: the-day-it-was created by UwU        :####:  :##:##:  :####:    */
-/*   Updated: 2023/11/20 16:47:08 by abareux          ###   ########.fr       */
+/*   Updated: the-day-it-was updated by UwU                                   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	set_data(t_settings settings, t_data *data, pthread_mutex_t *fork)
 		(data + idiot)->idiot.idiot_number = idiot + 1;
 		(data + idiot)->idiot.idiot_number_str = itoa(idiot + 1);
 		(data + idiot)->idiot.alive = 1;
-		(data + idiot)->idiot.time_left = 2;
+		(data + idiot)->idiot.time_left = 10;
 		if (idiot == 0)
 			(data + idiot)->idiot.left_fork = (fork);
 		else
