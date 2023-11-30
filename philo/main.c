@@ -12,6 +12,15 @@
 
 #include "philo.h"
 
+static
+unsigned long long int	gettime(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (1000 * tv.tv_sec + tv.tv_usec / 1000LL);
+}
+
 t_settings	init_arg_without_end(char **argv)
 {
 	t_settings	settings;
@@ -49,6 +58,28 @@ _Bool	check_settings(t_settings settings)
 	return (1);
 }
 
+void	simulate_one(t_settings settings)
+{
+	char	*time;
+	char	*time_dead;
+
+	time = itoa(gettime());
+	time_dead = itoa(gettime() + settings.time_to_die);
+	if (time)
+	{
+		write(1, time, ft_strlen(time));
+		write(1, " 1 has taken a fork\n", 21);
+		free(time);
+	}
+	usleep(settings.time_to_die * 1000);
+	if (time_dead)
+	{
+		write(1, time_dead, ft_strlen(time_dead));
+		write(1, " 1 has died\n", 13);
+		free(time_dead);
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_settings	settings;
@@ -63,6 +94,9 @@ int	main(int argc, char **argv)
 		return (write(1, "Error in the argument or protection\n", 37), 1);
 	if (argc == 6 && settings.required_eating == 0)
 		return (write(1, "nothing happenend, what did you except ?\n", 42), 0);
-	start_simulation(settings);
+	if (settings.nb_philo > 1)
+		start_simulation(settings);
+	else
+		simulate_one(settings);
 	return (0);
 }

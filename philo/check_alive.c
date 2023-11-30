@@ -63,6 +63,20 @@ void	update_state(t_data *data)
 	return ;
 }
 
+static
+void	every_ms(t_data *data)
+{
+	static unsigned long long int	last = 0;
+
+	if (!last)
+		last = gettime();
+	if (last - gettime() >= 1000)
+	{
+		update_state(data);
+		last = gettime();
+	}
+}
+
 void	check_alive(t_data *data)
 {
 	int	idiot;
@@ -74,7 +88,7 @@ void	check_alive(t_data *data)
 		idiot = 0;
 		dead = 0;
 		end = 0;
-		update_state(data);
+		every_ms(data);
 		while (idiot < (int) data->settings.nb_philo)
 		{
 			if ((idiot + data)->idiot.alive == -1)
@@ -87,6 +101,5 @@ void	check_alive(t_data *data)
 			genocide_idiot(data);
 		if (dead || end == (int) data->settings.nb_philo * 2)
 			break ;
-		usleep(1000);
 	}
 }
