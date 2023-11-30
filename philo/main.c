@@ -21,7 +21,7 @@ unsigned long long int	gettime(void)
 	return (1000 * tv.tv_sec + tv.tv_usec / 1000LL);
 }
 
-t_settings	init_arg_without_end(char **argv)
+t_settings	init_arg(int argc, char **argv)
 {
 	t_settings	settings;
 
@@ -30,18 +30,8 @@ t_settings	init_arg_without_end(char **argv)
 	settings.time_to_eat = ft_ullatoi(*(argv + 3));
 	settings.time_to_sleep = ft_ullatoi(*(argv + 4));
 	settings.required_eating = 0;
-	return (settings);
-}
-
-t_settings	init_arg_with_end(char **argv)
-{
-	t_settings	settings;
-
-	settings.nb_philo = ft_ullatoi(*(argv + 1));
-	settings.time_to_die = ft_ullatoi(*(argv + 2));
-	settings.time_to_eat = ft_ullatoi(*(argv + 3));
-	settings.time_to_sleep = ft_ullatoi(*(argv + 4));
-	settings.required_eating = ft_ullatoi(*(argv + 5));
+	if (argc == 6)
+		settings.required_eating = ft_ullatoi(*(argv + 5));
 	return (settings);
 }
 
@@ -84,10 +74,8 @@ int	main(int argc, char **argv)
 {
 	t_settings	settings;
 
-	if (argc == 5)
-		settings = init_arg_without_end(argv);
-	if (argc == 6)
-		settings = init_arg_with_end(argv);
+	if (argc == 5 || argc == 6)
+		settings = init_arg(argc, argv);
 	if (argc != 5 && argc != 6)
 		return (write(1, "Error in the argument\n", 23), (void) settings, 1);
 	if (!check_settings(settings))
